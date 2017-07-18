@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="GZ:war">
+    <output-path>D:/GZ_SVN/framework/trunk/GZ/target</output-path>
+    <root id="archive" name="GZ.war">
+      <element id="artifact" artifact-name="GZ:war exploded" />
+    </root>
+  </artifact>
+</component>

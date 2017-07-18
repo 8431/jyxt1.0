@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+                         http://www.springframework.org/schema/websocket
+                         http://www.springframework.org/schema/websocket/spring-websocket.xsd
+                         http://www.springframework.org/schema/aop
+                         http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <context:component-scan base-package="com.jyxt">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
+    <mvc:annotation-driven/>
+
+    <bean  class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+        <property name="prefix" value="/WEB-INF/" />
+        <property name="suffix" value=".jsp" />
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+    </bean>
+    <!-- API 接口跨域配置 -->
+    <mvc:cors>
+        <mvc:mapping path="/v1/index/**"
+                     allowed-origins="*"
+                     allowed-methods="POST, GET, OPTIONS, DELETE, PUT"
+                     allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+                     allow-credentials="true" />
+    </mvc:cors>
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+    <aop:config>
+        <aop:aspect id="time" ref="testaop" order="1">
+            <aop:pointcut id="pointcutTarget" expression="execution(* com.jyxt.index.controller.JyxtIndexController.*(..))" />
+            <aop:before method="beforeController" pointcut-ref="pointcutTarget" />
+            <aop:after-returning
+                    pointcut-ref="pointcutTarget"
+                    arg-names="joinPoint,retValue"
+                    returning="retValue"
+                    method="afterController"
+             />
+        </aop:aspect>
+    </aop:config>
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<bean class="com.jyxt.interceptor.ResultVoInterceprot">-->
+
+            <!--</bean>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+    <!-- 对静态资源文件的访问 -->
+    <!--<mvc:resources location="/image/"  mapping="/image/**"  cache-period="31556926" />-->
+    <!--<mvc:resources location="/jQuery/"  mapping="/jQuery/**"  cache-period="31556926" />-->
+    <!--<mvc:resources location="/js/"  mapping="/js/**"  cache-period="31556926" />-->
+    <!--<mvc:resources location="/sound/"  mapping="/sound/**"  cache-period="31556926" />-->
+    <!--<mvc:default-servlet-handler/>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--需拦截的地址-->
+            <mvc:mapping path="/*/*/*" />
+            <mvc:mapping path="/*/*" />
+            <!--需排除拦截的地址-->
+            <mvc:exclude-mapping path="/v1/login/*"/>
+            <bean class=" com.jyxt.interceptor.CheckLoginInterceprot" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <import resource="webscoket.xml"/>
+</beans>

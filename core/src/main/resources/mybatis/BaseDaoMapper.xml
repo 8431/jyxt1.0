@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyxt.Dao.IHxsgBaseDao">
+    <select id="totalsize" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1)
+        from
+        ${tablename}
+    </select>
+    <select id="selectEverythingToTableName" parameterType="java.util.Map" resultType="java.util.Map">
+        ${sql}
+    </select>
+
+    <select id="getTableColumn" parameterType="java.lang.String" resultType="com.jyxt.vo.ColumnAndComment">
+     select  column_name columnName, column_comment columnComment  from information_schema.columns
+    where table_schema =#{0,jdbcType=VARCHAR}  and table_name = #{1,jdbcType=VARCHAR};
+    </select>
+    <!--MYSQL数据库查询数据（未分页，数据较少由前台插件分页）-->
+    <select id="mybatisQueryPage" resultType="java.util.Map" parameterType="java.util.Map">
+     SELECT * FROM  ${tablename} order by id desc
+    </select>
+    <!--MYSQL数据库对于任意的表进行批量新增-->
+    <insert id="insertEverythingToTableName" parameterType="java.util.Map">
+        insert into ${tablename}(
+        <foreach collection="key" item="keyItem" index="index" separator=",">
+            ${keyItem}
+        </foreach>
+        )VALUES
+        <foreach collection="value" item="valueItem" index="valueIndex" separator=",">
+            (
+            <foreach collection="englishcloum" item="englishcloumItem" index="englishcloumindex" separator=",">
+                <foreach collection="valueItem" item="valueItemItem" index="valueItemIndex" separator=",">
+                    <if test='englishcloumItem==valueItemIndex'>
+                      #{valueItemItem}
+                    </if>
+                </foreach>
+            </foreach>
+            )
+        </foreach>
+    </insert>
+    <!--MYSQL数据库对于任意的表进行批量更新-->
+    <update id="updateTableToEverthing" parameterType="java.util.Map">
+        update
+        ${tablename}
+        <set>
+            <foreach collection="par" item="k" index="key"
+                     separator=" , ">
+                <if test="key!='tablename'">
+                    ${key}= #{k}
+                </if>
+            </foreach>
+        </set>
+        where
+        <foreach collection="mpwhere" item="item" index="index"
+                 separator=" and ">
+            ${index}=#{item}
+        </foreach>
+    </update>
+    <!--MYSQL数据库对于任意的表进行批量更新-->
+    <delete id="deleteToEverthing" parameterType="java.util.Map">
+       delete from   ${tablename} where id in (
+        <foreach collection="del" item="item" index="index"
+                 separator=", ">
+            #{item}
+        </foreach>
+
+
+       )
+
+    </delete>
+</mapper>

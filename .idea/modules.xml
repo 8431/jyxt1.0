@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://D:/GZ_SVN/framework/trunk/GZ/GZ.iml" filepath="D:/GZ_SVN/framework/trunk/GZ/GZ.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://D:/hxsg/xx/hxsg1.0/hxsg (2).iml" filepath="D:/hxsg/xx/hxsg1.0/hxsg (2).iml" />
+      <module fileurl="file://D:/hxsg/xx/hxsg1.0/hxsg-api/hxsg-api.iml" filepath="D:/hxsg/xx/hxsg1.0/hxsg-api/hxsg-api.iml" />
+      <module fileurl="file://D:/hxsg/xx/hxsg1.0/hxsg-core/hxsg-core (2).iml" filepath="D:/hxsg/xx/hxsg1.0/hxsg-core/hxsg-core (2).iml" />
+      <module fileurl="file://D:/hxsg/xx/hxsg1.0/hxsg-pkServer/pkServer (1) (com.hxsg).iml" filepath="D:/hxsg/xx/hxsg1.0/hxsg-pkServer/pkServer (1) (com.hxsg).iml" />
+      <module fileurl="file://$PROJECT_DIR$/jyxt1.0.iml" filepath="$PROJECT_DIR$/jyxt1.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pkServer/pkServer.iml" filepath="$PROJECT_DIR$/pkServer/pkServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
+    </modules>
+  </component>
+</project>

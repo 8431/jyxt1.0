@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://D:/GZ_SVN/framework/trunk/GZ" />
+    <file type="web" url="file://D:/hxsg/hxsg1.0/hxsg-admin" />
+    <file type="web" url="file://D:/hxsg/xx/hxsg1.0/hxsg-pkServer" />
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
+  <component name="IdProvider" IDEtalkID="4E672A204B30B6A82C55135C75BE3897" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="D:/GZ_SVN/framework/trunk/GZ/pom.xml" />
+        <option value="D:/hxsg/hxsg1.0/pom.xml" />
+        <option value="D:/hxsg/xx/hxsg1.0/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="D:/hxsg/hxsg1.0/hxsg-admin/pom.xml" />
+        <option value="D:/hxsg/hxsg1.0/hxsg-core/pom.xml" />
+        <option value="D:/hxsg/hxsg1.0/pom.xml" />
+        <option value="$PROJECT_DIR$/admin/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+</project>
